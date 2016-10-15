@@ -332,11 +332,12 @@
             CGFloat quality = 0.0;
             
             
-            NSImage *image = [[NSImage alloc] initWithContentsOfFile:[imagesURLArray[i] path]];
-            orignImageSize = image.size;
-            
+            NSImage *orignImage = [[NSImage alloc] initWithContentsOfFile:[imagesURLArray[i] path]];
+            orignImageSize = orignImage.size;
             
             for (NSInteger j = formatImageIndex; j < formatImageNumber; j++) {
+                
+                NSImage *image = [orignImage copy];
                 
                 if (!isFitSize) {
                     [image setSize:imageSize];
