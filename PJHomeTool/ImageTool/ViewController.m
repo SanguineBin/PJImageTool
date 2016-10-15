@@ -365,8 +365,8 @@
                 
                 if (backgroundBox.state == NSOnState) {
                     if (backgroundImage) {
+                        [bg setSize:NSMakeSize(produceImageSize.width, produceImageSize.height)];
                         [bg lockFocus];
-                        [bg setSize:NSMakeSize(produceImageSize.width * screenScale, produceImageSize.height * screenScale)];
                         [image drawInRect:NSMakeRect(0, 0, image.size.width, image.size.height)];
                     }
                 }
