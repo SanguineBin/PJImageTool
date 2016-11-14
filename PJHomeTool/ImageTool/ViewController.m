@@ -252,9 +252,6 @@
     //获取高
     CGFloat height = [dataArray[1] floatValue];
     
-    //设置图片尺寸
-    NSSize imageSize = {width,height};
-    
     //屏幕分辨率，区分retina屏和非retina屏
     CGFloat screenScale = [[NSScreen mainScreen] backingScaleFactor];
     
@@ -303,7 +300,6 @@
     NSInteger formatImageIndex = [[dataArray[6] objectAtIndex:0] integerValue];
     NSInteger formatImageNumber = [dataArray[6] count];
     
-    __block NSSize orignImageSize;
     __block NSSize produceImageSize;
     
     
@@ -333,27 +329,29 @@
             
             
             NSImage *orignImage = [[NSImage alloc] initWithContentsOfFile:[imagesURLArray[i] path]];
-            orignImageSize = orignImage.size;
+            NSSize orignImageSize = {orignImage.size.width,orignImage.size.height};
             
             for (NSInteger j = formatImageIndex; j < formatImageNumber; j++) {
                 
                 NSImage *image = [orignImage copy];
                 
                 if (!isFitSize) {
-                    [image setSize:imageSize];
+                    //设置图片尺寸
+                    NSSize imageSize = {width/screenScale,height/screenScale};
+                    orignImageSize = imageSize;
                 }
                 
                 if (j == 0) {
-                    NSSize imageHalfSize = {image.size.width / screenScale / 2.0f,image.size.height /screenScale / 2.0f};
+                    NSSize imageHalfSize = {orignImageSize.width / 2.0f,orignImageSize.height / 2.0f};
                     produceImageSize = imageHalfSize;
                     quality = oneQuality;
                 }else if (j == 1) {
-                    NSSize imageEqualSize = {orignImageSize.width / screenScale,orignImageSize.height / screenScale};
+                    NSSize imageEqualSize = {orignImageSize.width,orignImageSize.height};
                     produceImageSize = imageEqualSize;
                     quality = twoQuality;
                 }
                 else if (j == 2) {
-                    NSSize imageHalfMoreSize = {orignImageSize.width / screenScale * 1.5f,orignImageSize.height / screenScale * 1.5f};
+                    NSSize imageHalfMoreSize = {orignImageSize.width * 1.5f,orignImageSize.height * 1.5f};
                     produceImageSize = imageHalfMoreSize;
                     
                     quality = threeQuality;
@@ -367,7 +365,7 @@
                     if (backgroundImage) {
                         [bg setSize:NSMakeSize(produceImageSize.width, produceImageSize.height)];
                         [bg lockFocus];
-                        [image drawInRect:NSMakeRect(0, 0, image.size.width, image.size.height)];
+                        [image drawInRect:NSMakeRect(0, 0, orignImageSize.width, orignImageSize.height)];
                     }
                 }
                 else {
@@ -375,7 +373,7 @@
                 }
                 
                 NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc]
-                                              initWithFocusedViewRect:CGRectMake(0, 0,image.size.width, image.size.height)];
+                                              initWithFocusedViewRect:CGRectMake(0, 0,produceImageSize.width, produceImageSize.height)];
                 NSData *imageData;
                 if (isJPG) {
                     NSDictionary *imagePros = [NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:quality]
