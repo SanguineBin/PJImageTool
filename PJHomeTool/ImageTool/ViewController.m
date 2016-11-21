@@ -365,7 +365,7 @@
                     if (backgroundImage) {
                         [bg setSize:NSMakeSize(produceImageSize.width, produceImageSize.height)];
                         [bg lockFocus];
-                        [image drawInRect:NSMakeRect(0, 0, orignImageSize.width, orignImageSize.height)];
+                        [image drawInRect:NSMakeRect(0, 0, produceImageSize.width, produceImageSize.height)];
                     }
                 }
                 else {
