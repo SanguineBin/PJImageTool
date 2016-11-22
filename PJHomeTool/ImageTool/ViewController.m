@@ -33,7 +33,8 @@
     __weak IBOutlet NSButton *formatTwoBox;
     //(3)3x选项栏
     __weak IBOutlet NSButton *formatThreeBox;
-    
+    //(4)不指定选项栏
+    __weak IBOutlet NSButton *formatNoBox;
     
     //图片质量选项栏
     //(1)自动调节质量框（只适用于JPG图片，
@@ -204,6 +205,10 @@
         [tempFormatImageIndexArray addObject:@"2"];
     }
     
+    if (formatNoBox.state == NSOnState) {
+        [tempFormatImageIndexArray addObject:@"3"];
+    }
+    
     [dataArray addObject:tempWidth];//0
     [dataArray addObject:tempHeight];//1
     [dataArray addObject:tempOneQuality];//2
@@ -298,7 +303,7 @@
     }
     
     NSInteger formatImageIndex = [[dataArray[6] objectAtIndex:0] integerValue];
-    NSInteger formatImageNumber = [dataArray[6] count];
+    NSInteger formatImageNumber = [[dataArray[6] objectAtIndex:[dataArray[6] count]-1] integerValue]+1;
     
     __block NSSize produceImageSize;
     
@@ -345,7 +350,7 @@
                     NSSize imageHalfSize = {orignImageSize.width / 2.0f,orignImageSize.height / 2.0f};
                     produceImageSize = imageHalfSize;
                     quality = oneQuality;
-                }else if (j == 1) {
+                }else if (j == 1 || j == 3) {
                     NSSize imageEqualSize = {orignImageSize.width,orignImageSize.height};
                     produceImageSize = imageEqualSize;
                     quality = twoQuality;
@@ -353,7 +358,6 @@
                 else if (j == 2) {
                     NSSize imageHalfMoreSize = {orignImageSize.width * 1.5f,orignImageSize.height * 1.5f};
                     produceImageSize = imageHalfMoreSize;
-                    
                     quality = threeQuality;
                 }
                 
@@ -387,7 +391,7 @@
                     imageType = @".png";
                 }
                 NSString *imageName;
-                if (j == 0) {
+                if (j == 0 || j == 3) {
                     if ([dataArray[5] length] == 0) {
                         imageName = [NSString stringWithFormat:@"%@/%ld%@",contentsPath,imageIndex,imageType];
                     }else {
@@ -444,7 +448,7 @@
                 
                 [imageData writeToFile:[imageName stringByExpandingTildeInPath] atomically:YES];
                 
-                if (j == 0) {
+                if (j == formatImageIndex) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (i == (imagesURLArray.count - 1)) {
                             isStopInput = NO;

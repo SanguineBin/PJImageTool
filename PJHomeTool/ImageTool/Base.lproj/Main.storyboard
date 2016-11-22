@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -652,9 +653,10 @@
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="520" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="510" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="510" height="270"/>
+                        <value key="maxSize" type="size" width="510" height="270"/>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -669,7 +671,7 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="520" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="510" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tXM-E3-aFb">
@@ -940,7 +942,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Al8-tk-JAk">
-                                <rect key="frame" x="291" y="152" width="61" height="18"/>
+                                <rect key="frame" x="291" y="152" width="50" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="1x" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="xb8-0x-ROU">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -948,7 +950,7 @@
                                 </buttonCell>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ux6-cl-myH">
-                                <rect key="frame" x="364" y="152" width="61" height="18"/>
+                                <rect key="frame" x="340" y="152" width="50" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="2x" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gv1-eJ-Aa3">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -987,7 +989,7 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfg-XK-gkw">
-                                <rect key="frame" x="429" y="152" width="61" height="18"/>
+                                <rect key="frame" x="392" y="152" width="50" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="3x" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NTC-LC-pPJ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1014,12 +1016,21 @@
                                     <action selector="stopInput:" target="XfG-lQ-9wD" id="C6i-PD-P0X"/>
                                 </connections>
                             </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3uQ-bI-95R">
+                                <rect key="frame" x="442" y="152" width="60" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="不指定" bezelStyle="regularSquare" imagePosition="left" inset="2" id="NKX-X2-82f">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="backgroundBox" destination="A7G-Ph-j4v" id="f6Y-QU-8k7"/>
                         <outlet property="fitQualityBox" destination="y2c-za-hfZ" id="zhu-nk-1QM"/>
                         <outlet property="fitSizeBox" destination="dVF-mc-dRF" id="VR2-oC-QVu"/>
+                        <outlet property="formatNoBox" destination="3uQ-bI-95R" id="Kou-SX-I6U"/>
                         <outlet property="formatOneBox" destination="Al8-tk-JAk" id="r0o-82-vy3"/>
                         <outlet property="formatThreeBox" destination="cfg-XK-gkw" id="27C-UO-twh"/>
                         <outlet property="formatTwoBox" destination="ux6-cl-myH" id="biQ-c4-8zJ"/>
